@@ -17,6 +17,7 @@ FILE *in_fp, *fopen();
 void addChar();
 void getChar();
 void getNonBlank();
+void getNonBlankLine();
 int lex();
 void stmt();
 void term();
@@ -37,6 +38,7 @@ void error();
 #define DIV_OP 24
 #define LEFT_PAREN 25
 #define RIGHT_PAREN 26
+
 /******************************************************/
 /* main driver */
 int main() {
@@ -46,10 +48,14 @@ int main() {
     else {
         getChar();
         do {
+            getNonBlankLine();
             lex();
+            stmt();
+            restart = 0;
         } while (nextToken != EOF);
     }
 }
+
 /*****************************************************/
 /* lookup - a function to lookup operators and parentheses
 and return the token */
@@ -78,6 +84,10 @@ int lookup(char ch) {
         case '/':
         addChar();
         nextToken = DIV_OP;
+        break;
+        case '=':
+        addChar();
+        nextToken = ASSIGN_OP;
         break;
         default:
         addChar();

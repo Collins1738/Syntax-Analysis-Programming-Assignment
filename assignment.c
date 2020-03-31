@@ -124,9 +124,12 @@ returns a non-
 whitespace
 character */
 void getNonBlank() {
-    while (isspace(nextChar)) getChar();
+    while (isspace(nextChar) && nextChar!='\n') getChar();
 }
 
+void getNonBlankLine() {
+    while (isspace(nextChar)) getChar();
+}
 /*****************************************************/
 /* lex - a simple lexical analyzer for arithmetic
 expressions */

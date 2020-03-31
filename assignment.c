@@ -106,7 +106,6 @@ void addChar() {
     }
     else printf("Error - lexeme is too long \n");
 }
-
 /*****************************************************/
 /* getChar - a function to get the next character of
 input and determine its character class */
@@ -114,11 +113,11 @@ void getChar() {
     if ((nextChar = getc(in_fp)) != EOF) {
         if (isalpha(nextChar)) charClass = LETTER;
         else if (isdigit(nextChar)) charClass = DIGIT;
+        else if (nextChar == '\n') charClass = NEXTLINE;
         else charClass = UNKNOWN;
     }
     else charClass = EOF;
 }
-
 /*****************************************************/
 /* getNonBlank - a function to call getChar until it
 returns a non-

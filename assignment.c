@@ -48,9 +48,13 @@ int main() {
     else {
         getChar();
         do {
-            getNonBlankLine();
-            lex();
-            stmt();
+            getNonBlank();
+            if (nextChar == '\n'){
+                printf("Next token is: -1, Next lexeme is EOF\n");
+            }else{
+                lex();
+                stmt();
+            }
             restart = 0;
         } while (nextToken != EOF);
     }
@@ -158,12 +162,10 @@ int lex() {
         nextToken = INT_LIT;
         break;
         case NEXTLINE:
-        nextToken = EOF;
-        lexeme[0] = 'E';
-        lexeme[1] = 'O';
-        lexeme[2] = 'F';
-        lexeme[3] = 0;
+        nextToken = 12;
         getChar();
+        // printf("Next token is: -1, Next lexeme is EOF\n");
+        return nextToken;
         break;
         /* Parentheses and operators */
         case UNKNOWN:

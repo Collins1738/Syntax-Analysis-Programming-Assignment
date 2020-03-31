@@ -16,6 +16,7 @@ void addChar();
 void getChar();
 void getNonBlank();
 int lex();
+void error();
 /* Character classes */
 #define LETTER 0
 #define DIGIT 1
@@ -216,3 +217,18 @@ void factor() {
     } /* End of else */
     printf("Exit <factor>\n");
 } /* End of function factor */
+
+void error(){
+    printf("Error\n");
+    restart = 1;
+    nextChar = getc(in_fp);
+    while (  (nextChar != '\n') && (charClass!=EOF) ) {
+        getChar();
+    }
+    if (charClass == EOF) {
+        // printf("EOF\n");
+        return;
+    }
+    getChar();
+    return;   
+}

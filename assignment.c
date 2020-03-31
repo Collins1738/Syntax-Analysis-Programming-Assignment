@@ -187,11 +187,13 @@ void expr() {
     printf("Enter <expr>\n");
     /* Parse the first term */
     term();
+    if (restart) return;
     /* As long as the next token is + or -, get
     the next token and parse the next term */
-    while (nextToken == ADD_OP || nextToken == SUB_OP) {
+    while ((nextToken == ADD_OP || nextToken == SUB_OP) && charClass != NEXTLINE) {
         lex();
         term();
+        if (restart) return;
     }
     printf("Exit <expr>\n");
 } /* End of function expr */

@@ -10,16 +10,22 @@ char nextChar;
 int lexLen;
 int token;
 int nextToken;
+int restart = 0;
 FILE *in_fp, *fopen();
+
 /* Function declarations */
 void addChar();
 void getChar();
 void getNonBlank();
 int lex();
+void stmt();
+void term();
+void factor();
 void error();
 /* Character classes */
 #define LETTER 0
 #define DIGIT 1
+#define NEXTLINE 2
 #define UNKNOWN 99
 /* Token codes */
 #define INT_LIT 10
@@ -217,6 +223,28 @@ void factor() {
     } /* End of else */
     printf("Exit <factor>\n");
 } /* End of function factor */
+
+void stmt(){
+    printf("Enter <stmt>\n");
+    // lex();
+    if (nextToken == IDENT){
+        lex();
+        if (nextToken == ASSIGN_OP){
+            lex();
+            expr();
+            if (restart) return;
+        }
+        else {
+            error();
+            return;
+        }
+    }
+    else {
+        error();
+        return;
+    }
+    printf("Exit <stmt>\n");
+} /* End of statement term */
 
 void error(){
     printf("Error\n");

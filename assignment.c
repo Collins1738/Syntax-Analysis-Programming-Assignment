@@ -54,6 +54,7 @@ int main() {
                 getChar();
             }else{
                 lex();
+                if (nextToken == EOF) break;
                 stmt();
             }
             restart = 0;

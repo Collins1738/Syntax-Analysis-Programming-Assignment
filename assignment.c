@@ -166,7 +166,7 @@ int lex() {
         case NEXTLINE:
         nextToken = 12;
         getChar();
-        // printf("Next token is: -1, Next lexeme is EOF\n");
+        printf("Next token is: -1, Next lexeme is EOF\n");
         return nextToken;
         break;
         /* Parentheses and operators */

@@ -51,6 +51,7 @@ int main() {
             getNonBlank();
             if (nextChar == '\n'){
                 printf("Next token is: -1, Next lexeme is EOF\n");
+            }else if (charClass == EOF) {printf("Next token is: -1, Next lexeme is EOF\n");break;
             }else{
                 lex();
                 // if (nextToken == EOF) break;

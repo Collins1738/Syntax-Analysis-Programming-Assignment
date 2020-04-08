@@ -46,19 +46,18 @@ int main() {
     if ((in_fp = fopen("front.in", "r")) == NULL)
         printf("ERROR - cannot open front.in \n");
     else {
-        getChar();
         do {
+            getChar();
             getNonBlank();
             if (nextChar == '\n'){
                 printf("Next token is: -1, Next lexeme is EOF\n");
-                getChar();
             }else{
                 lex();
                 if (nextToken == EOF) break;
                 stmt();
             }
             restart = 0;
-        } while (nextToken != EOF);
+        } while (charClass != EOF);
     }
 }
 
@@ -165,7 +164,7 @@ int lex() {
         break;
         case NEXTLINE:
         nextToken = 12;
-        getChar();
+        // getChar();
         printf("Next token is: -1, Next lexeme is EOF\n");
         return nextToken;
         break;
@@ -285,12 +284,12 @@ void stmt(){
 void error(){
     printf("Error\n");
     restart = 1;
-    nextChar = getc(in_fp);
-    while (  (nextChar != '\n') && (charClass!=EOF) ) {
-        getChar();
+    if (nextChar != '\n'){
+        while (  (nextChar != '\n') && (charClass!=EOF) ) {
+            getChar();
+        }
     }
     if (charClass == EOF) {
-        // printf("EOF\n");
         return;
     }
     getChar();

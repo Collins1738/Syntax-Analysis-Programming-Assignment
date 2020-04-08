@@ -53,7 +53,7 @@ int main() {
                 printf("Next token is: -1, Next lexeme is EOF\n");
             }else{
                 lex();
-                if (nextToken == EOF) break;
+                // if (nextToken == EOF) break;
                 stmt();
             }
             restart = 0;
@@ -267,7 +267,8 @@ void stmt(){
         if (nextToken == ASSIGN_OP){
             lex();
             expr();
-            if (restart) return;
+            if ((nextChar != '\n' && charClass != EOF) && restart == 0 ) error();
+            if (restart) return;     
         }
         else {
             error();
@@ -292,6 +293,6 @@ void error(){
     if (charClass == EOF) {
         return;
     }
-//     getChar();
+    // getChar();
     return;   
 }

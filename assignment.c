@@ -292,6 +292,6 @@ void error(){
     if (charClass == EOF) {
         return;
     }
-    getChar();
+//     getChar();
     return;   
 }
